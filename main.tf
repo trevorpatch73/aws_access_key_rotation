@@ -24,7 +24,7 @@ terraform {
 
 variable "repository" {
   type    = string
-  default = "test7"
+  default = "test8"
 }
 
 variable "environment" {
