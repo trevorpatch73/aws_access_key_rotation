@@ -97,7 +97,10 @@ resource "aws_iam_role" "lambda_role" {
 }
 
 resource "aws_iam_access_key" "repository_iam_user_key" {
-  user    = aws_iam_user.repository_iam_user_key.name
+  user    = aws_iam_user.repository_iam_user.name
+
+  depends_on    = [aws_iam_user.repository_iam_user]
+
 }
 
 resource "aws_iam_policy" "lambda_policy" {
@@ -193,4 +196,12 @@ resource "aws_cloudwatch_event_target" "lambda_fx_key_rotation_event_target" {
 
   depends_on = [aws_lambda_function.lambda_fx_key_rotation, aws_cloudwatch_event_rule.lambda_fx_key_rotation_event_trigger]
 
+}
+
+resource "aws_lambda_permission" "allow_cloudwatch_to_lambda" {
+  statement_id = "AllowExecutionFromCloudWatch"
+  action = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.lambda_fx_key_rotation.function_name
+  principal = "events.amazonaws.com"
+  source_arn = aws_cloudwatch_event_rule.lambda_fx_key_rotation_event_trigger.arn
 }
