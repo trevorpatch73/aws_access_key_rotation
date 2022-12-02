@@ -167,3 +167,20 @@ resource "aws_lambda_function" "lambda_fx_key_rotation" {
   depends_on = [aws_iam_role_policy_attachment.attach_lambda_iam_policy_to_iam_role, aws_s3_bucket_object.github_webhook_src]
 
 }
+
+resource "aws_cloudwatch_event_rule" "lambda_fx_key_rotation_event_trigger" {
+  name        = "lambda_fx_key_rotation_event_trigger"
+  description = "Triggers lambda to rotate IAM Access Keys"
+  schedule_expression = "rate(12 hours)"
+
+  tags = {
+    Application = join("-", ["lambda-key-rotation", var.repository])
+    Environment = var.environment
+    Location    = join("-", ["aws", var.region])
+  }
+}
+
+resource "aws_cloudwatch_event_target" "lambda_fx_key_rotation_event_target" {
+  rule       = "${aws_cloudwatch_event_rule.lambda_fx_key_rotation_event_trigger.name}"
+  arn        = "${aws_lambda_function.lambda_fx_key_rotation.arn}"
+}
