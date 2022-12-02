@@ -96,6 +96,10 @@ resource "aws_iam_role" "lambda_role" {
   }
 }
 
+resource "aws_iam_access_key" "repository_iam_user_key" {
+  user    = aws_iam_user.repository_iam_user_key.name
+}
+
 resource "aws_iam_policy" "lambda_policy" {
   name        = "aws_iam_policy_for_terraform_aws_lambda_role"
   path        = "/"
