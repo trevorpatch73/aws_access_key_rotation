@@ -178,9 +178,15 @@ resource "aws_cloudwatch_event_rule" "lambda_fx_key_rotation_event_trigger" {
     Environment = var.environment
     Location    = join("-", ["aws", var.region])
   }
+
+  depends_on = [aws_lambda_function.lambda_fx_key_rotation]
+
 }
 
 resource "aws_cloudwatch_event_target" "lambda_fx_key_rotation_event_target" {
   rule       = "${aws_cloudwatch_event_rule.lambda_fx_key_rotation_event_trigger.name}"
   arn        = "${aws_lambda_function.lambda_fx_key_rotation.arn}"
+
+  depends_on = [aws_lambda_function.lambda_fx_key_rotation, aws_cloudwatch_event_rule.lambda_fx_key_rotation_event_trigger]
+
 }
