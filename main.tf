@@ -62,6 +62,7 @@ resource "aws_secretsmanager_secret_version" "sversion" {
 
 resource "aws_iam_user" "repository_iam_user" {
   name = var.repository
+  force_destroy = true
 
   tags = {
     Application = join("-", ["lambda-key-rotation", var.repository])
