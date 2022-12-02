@@ -25,8 +25,8 @@ def lambda_handler(event, context):
         # UPDATE SECRETS MANAGER KEY STORE FOR IAM_USER:SERVICE
         GET_SECRETS = secretsmanager.get_secret_value(SecretId=USERNAME)
         SECRETS_JSON = json.loads(GET_SECRETS['SecretString'])
-        SECRETS_JSON['AccessKeyId'] = CREATE_ACCESS_KEY['AccessKey']['AccessKeyId']
-        SECRETS_JSON['SecretAccessKey'] = CREATE_ACCESS_KEY['AccessKey']['SecretAccessKey']
+        SECRETS_JSON['AWS_ACCESS_KEY_ID'] = CREATE_ACCESS_KEY['AccessKey']['AccessKeyId']
+        SECRETS_JSON['AWS_SECRET_ACCESS_KEY'] = CREATE_ACCESS_KEY['AccessKey']['SecretAccessKey']
         SECRETS_STRING = json.dumps(SECRETS_JSON)
 
         # EXECUTE ACTIONS TO SECRETS MANAGER
