@@ -32,7 +32,7 @@ jobs:
         continue-on-error: true     
 
       - name: Terraform Init
-        working-directory: key_rotationß
+        working-directory: key_rotation
         id: init
         run: terraform workspace select ${{ env.TERRAFORM_WORKSPACE }} && terraform init -reconfigure
 
