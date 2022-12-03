@@ -1,6 +1,6 @@
 variable "repository" {
   type    = string
-  default = "test8"
+  default = "INSERT_GITHUB_REPOSITORY_NAME"
 }
 
 variable "environment" {
