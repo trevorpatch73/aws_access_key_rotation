@@ -1,7 +1,9 @@
 # AWS Access Key Rotation within Github Repository
 
+<img alt="Starlite logo" src=".aws.jpeg" width="auto" height="auto">
+
 ## Description
-Hello, I am Trevor Patch, co-founder at Nautilux Solutions. I build and consult on pipelines for automating tasks in AWS. 
+Hello, I am Trevor Patch, co-founder at Nautilux Solutßions. I build and consult on pipelines for automating tasks in AWS. 
 Often, individuals/teams do not rotate the keys to their cloud environment, and leave their organization to higher risks of being breached.
 This project is aimed at providing a free solution to rotate those AWS keys within your Github Secret Actions for any given repository.
 Through the integration of this code into your Github respositories, individually, it will launch an AWS Lambda Function cron triggered by Cloudwatch every 12 hours to rotate those keys.
