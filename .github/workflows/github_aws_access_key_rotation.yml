@@ -24,7 +24,7 @@ jobs:
         uses: hashicorp/setup-terraform@v1
 
       - name: Terraform Workspace
-        working-directory: github_aws_access_key_rotation
+        working-directory: key_rotation
         id: workspace
         run: |
           terraform init
@@ -32,47 +32,47 @@ jobs:
         continue-on-error: true     
 
       - name: Terraform Init
-        working-directory: github_aws_access_key_rotation
+        working-directory: key_rotation
         id: init
         run: terraform workspace select ${{ env.TERRAFORM_WORKSPACE}} && terraform init
 
       - name: Terraform Format
-        working-directory: github_aws_access_key_rotation
+        working-directory: key_rotation
         id: fmt
         run: terraform workspace select ${{ env.TERRAFORM_WORKSPACE}} && terraform fmt
 
       - name: Terraform Validate
-        working-directory: github_aws_access_key_rotation
+        working-directory: key_rotation
         id: validate
         run: terraform workspace select ${{ env.TERRAFORM_WORKSPACE}} && terraform validate -no-color
 
       - name: Terraform Plan
-        working-directory: github_aws_access_key_rotation
+        working-directory: key_rotation
         id: plan
         if: github.event_name == 'pull_request'
         run: terraform workspace select ${{ env.TERRAFORM_WORKSPACE}} && terraform plan -no-color -input=false
         continue-on-error: true
 
       - name: Terraform Plan Status
-        working-directory: github_aws_access_key_rotation
+        working-directory: key_rotation
         if: steps.plan.outcome == 'failure'
         run: exit 1
 
       - name: Terraform Apply
-        working-directory: github_aws_access_key_rotation
+        working-directory: key_rotation
         id: apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push' && env.TERRAFORM_STATE == 'apply'
         run: terraform workspace select ${{ env.TERRAFORM_WORKSPACE}} && terraform apply -auto-approve
         continue-on-error: true
 
       - name: Terraform Apply Status
-        working-directory: github_aws_access_key_rotation
+        working-directory: key_rotation
         if: steps.apply.outcome == 'failure' && env.TERRAFORM_STATE == 'apply'
         run: |
           terraform workspace select ${{ env.TERRAFORM_WORKSPACE}} && terraform destroy -auto-approve
           exit 1
       - name: Terraform Destroy
-        working-directory: github_aws_access_key_rotation
+        working-directory: key_rotation
         id: destroy
         if: github.ref == 'refs/heads/main' && github.event_name == 'push' && env.TERRAFORM_STATE == 'destroy'
         run: | 
