@@ -23,18 +23,17 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
 
+      - name: Terraform Init
+        id: init
+        run: terraform init        
+
       - name: Terraform Workspace
         working-directory: key_rotation
         id: workspace
-        run: |
-          terraform init
+        run: |       
           terraform workspace new ${{ env.TERRAFORM_WORKSPACE}} 
+          terraform workspace select ${{ env.TERRAFORM_WORKSPACE}} && terraform init
         continue-on-error: true     
-
-      - name: Terraform Init
-        working-directory: key_rotation
-        id: init
-        run: terraform workspace select ${{ env.TERRAFORM_WORKSPACE}} && terraform init
 
       - name: Terraform Format
         working-directory: key_rotation
