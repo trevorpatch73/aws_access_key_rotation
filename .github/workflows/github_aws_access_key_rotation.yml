@@ -31,6 +31,7 @@ jobs:
         working-directory: key_rotation
         id: workspace
         run: |       
+          terraform init
           terraform workspace new ${{ env.TERRAFORM_WORKSPACE}} 
           terraform workspace select ${{ env.TERRAFORM_WORKSPACE}} && terraform init
         continue-on-error: true     
