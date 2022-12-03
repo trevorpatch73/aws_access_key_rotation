@@ -1,6 +1,6 @@
 # AWS Access Key Rotation within Github Repository
 
-<img alt="Starlite logo" src=".aws.jpeg" width="auto" height="auto">
+<img alt="aws" src="./aws.jpeg" width="auto" height="auto">
 
 ## Description
 Hello, I am Trevor Patch, co-founder at Nautilux Solutßions. I build and consult on pipelines for automating tasks in AWS. 
