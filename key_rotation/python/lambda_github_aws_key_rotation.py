@@ -2,7 +2,7 @@ import json
 import boto3
 import requests
 
-REPOSITORY_NAME = str("test8")
+REPOSITORY_NAME = str("INSERT_GITHUB_REPOSITORY_NAME")
 
 iam = boto3.client('iam')
 secretsmanager = boto3.client('secretsmanager')
