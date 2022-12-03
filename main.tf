@@ -12,15 +12,13 @@ provider "aws" {
   region = var.region
 }
 
-/*
 terraform {
   backend "s3" {
-    bucket = "lambda_key_rotation"
+    bucket = "us-east1-tpatch-terraform"
     key    = "root/workspaces/github/terraform.tfstate"
     region = "us-east-1"
   }
 }
-*/
 
 variable "repository" {
   type    = string
