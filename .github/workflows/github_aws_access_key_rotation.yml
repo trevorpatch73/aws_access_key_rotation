@@ -35,11 +35,6 @@ jobs:
           terraform workspace select ${{ env.TERRAFORM_WORKSPACE}} && terraform init
         continue-on-error: true     
 
-      - name: Terraform Validate
-        working-directory: key_rotation
-        id: validate
-        run: terraform workspace select ${{ env.TERRAFORM_WORKSPACE}} && terraform validate -no-color
-
       - name: Terraform Plan
         working-directory: key_rotation
         id: plan
