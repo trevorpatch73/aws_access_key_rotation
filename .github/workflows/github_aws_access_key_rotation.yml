@@ -16,7 +16,7 @@ jobs:
       TERRAFORM_WORKSPACE: github-aws-key-rotation
       TERRAFORM_STATE: destroy
 
-    step:
+    steps:
       - name: Checkout
         uses: actions/checkout@v3       
 
