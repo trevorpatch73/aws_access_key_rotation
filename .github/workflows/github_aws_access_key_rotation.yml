@@ -35,7 +35,8 @@ jobs:
         working-directory: key_rotation
         id: init
         run: terraform workspace select ${{ env.TERRAFORM_WORKSPACE }} && terraform init -reconfigure
-
+        continue-on-error: true 
+x
       - name: Terraform Plan
         working-directory: key_rotation
         id: plan
