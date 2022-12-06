@@ -1,6 +1,6 @@
 variable "repository" {
   type    = string
-  default = "INSERT_GITHUB_REPOSITORY_NAME"
+  default = "aws_key_rotation"
 }
 
 variable "environment" {
