@@ -34,9 +34,20 @@ jobs:
       - name: Terraform Init
         working-directory: key_rotation
         id: init
-        run: terraform workspace select ${{ env.TERRAFORM_WORKSPACE }} && terraform init -reconfigure
+        run: terraform workspace select ${{ env.TERRAFORM_WORKSPACE }} && terraform init
         continue-on-error: true 
-        
+
+      - name: Terraform Init Reconfigure
+        working-directory: key_rotation
+        id: reconfigure
+        if: steps.init.outcome == 'failure'
+        run: terraform workspace select ${{ env.TERRAFORM_WORKSPACE }} && terraform init -reconfigure      
+
+      - name: Terraform Init Migrate State
+        working-directory: key_rotation
+        if: steps.reconfigure.outcome == 'failure'
+        run: terraform workspace select ${{ env.TERRAFORM_WORKSPACE }} && terraform init -migrate-state
+
       - name: Terraform Plan
         working-directory: key_rotation
         id: plan
