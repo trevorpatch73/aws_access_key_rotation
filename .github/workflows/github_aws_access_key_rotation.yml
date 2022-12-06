@@ -41,7 +41,8 @@ jobs:
         working-directory: key_rotation
         id: reconfigure
         if: steps.init.outcome == 'failure'
-        run: terraform workspace select ${{ env.TERRAFORM_WORKSPACE }} && terraform init -reconfigure      
+        run: terraform workspace select ${{ env.TERRAFORM_WORKSPACE }} && terraform init -reconfigure
+        continue-on-error: true 
 
       - name: Terraform Init Migrate State
         working-directory: key_rotation
