@@ -1,6 +1,6 @@
 variable "repository" {
   type    = string
-  default = "aws_key_rotation"
+  default = "aws-key-rotation"
 }
 
 variable "environment" {

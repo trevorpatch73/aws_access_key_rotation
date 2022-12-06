@@ -2,7 +2,7 @@ import json
 import boto3
 import requests
 
-REPOSITORY_NAME = str("aws_key_rotation")
+REPOSITORY_NAME = str("aws-key-rotation")
 
 iam = boto3.client('iam')
 secretsmanager = boto3.client('secretsmanager')
